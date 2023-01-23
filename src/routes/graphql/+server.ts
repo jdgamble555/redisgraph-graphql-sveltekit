@@ -4,15 +4,14 @@ import { error } from '@sveltejs/kit';
 import { typeDefs } from '$lib/server/schema';
 import { resolvers } from '$lib/server/resolvers';
 
+const server = new ApolloServer({
+    typeDefs,
+    resolvers
+});
 
 export const POST = (async ({ request, locals }) => {
 
     const session = await locals.getSession();
-
-    const server = new ApolloServer({
-        typeDefs,
-        resolvers
-    });
 
     const r = await request.json();
     const graphqlresponse = await server.executeOperation(r, { contextValue: session ?? '' });
