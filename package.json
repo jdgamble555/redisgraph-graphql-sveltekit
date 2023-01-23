@@ -2,6 +2,16 @@
 	"name": "redisgraph-graphql-sveltekit",
 	"version": "0.0.1",
 	"private": true,
+	"browser": {
+		"events": false,
+		"crypto": false,
+		"buffer": false,
+		"url": false,
+		"os": false,
+		"zlib": false,
+		"net": false,
+		"tls": false
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
