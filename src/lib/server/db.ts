@@ -15,7 +15,6 @@ export const db = {
     add: async (label: string, params: any, context?: any) => {
         params = { createdAt: new Date().getTime(), uid: context.user.email, ...params };
         const q = `CREATE (a:${label}` + pretty_json(params) + ') RETURN toJSON(a)';
-        console.log(q);
         const r = await query(q);
         if (r?.data) {
             return formatResults(r.data);
