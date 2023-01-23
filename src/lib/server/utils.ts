@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import json5 from "json5";
 
 export const createVals = (j: any, v: string, _join = ', ') =>
@@ -60,4 +61,17 @@ export const noUndefined = (x: any) => {
     return x;
 };
 
-
+export const create_set = (params: any) => {
+    let r = 'SET ';
+    Object.keys(params).map((p, i, row) => {
+        const value = params[p];
+        const isLast = i + 1 === row.length;
+        if (value !== undefined && p !== 'id') {
+            r += `n.${p} = ` + value;
+            if (!isLast) {
+                r += ', ';
+            }
+        }
+    });
+    return r;
+};

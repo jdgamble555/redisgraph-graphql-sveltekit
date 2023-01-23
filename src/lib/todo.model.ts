@@ -4,3 +4,10 @@ export interface Todo {
     completed: boolean;
     createdAt?: Date;
 };
+
+export interface User {
+    id: string;
+    displayName: string;
+    email: string;
+    todos?: [Todo]
+};

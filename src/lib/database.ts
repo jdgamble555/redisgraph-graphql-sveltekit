@@ -2,7 +2,6 @@ import { page } from "$app/stores";
 import { get, writable } from "svelte/store";
 import type { Todo } from "./todo.model";
 
-
 // todos
 
 export const db = (() => {
@@ -16,14 +15,14 @@ export const db = (() => {
         getTodos: () => ({ set, update, subscribe }),
 
         addTodo: async (text: string) => {
-            const q = `mutation { addTask(input: { title: "${text}", completed: false }) { id title completed } }`;
-            const r = await gql(q).then((r) => r.addTask);
+            const q = `mutation { addTodo(input: { title: "${text}", completed: false }) { id title completed createdAt } }`;
+            const r = await gql(q).then((r) => r.addTodo);
             update((v) => ([...v, r]));
         },
 
         updateTodo: async (id: string, complete: boolean) => {
-            const q = `mutation { updateTask(input: { id: "${id}", completed: ${complete} }) { id title completed } }`;
-            const r = await gql(q).then((r) => r.updateTask);
+            const q = `mutation { updateTodo(input: { id: "${id}", completed: ${complete} }) { id title completed createdAt } }`;
+            const r = await gql(q).then((r) => r.updateTodo);
             update((v) => {
                 const i = v.findIndex(r => r['id'] === id);
                 if (i !== -1) v.splice(i, 1, r);
@@ -32,8 +31,8 @@ export const db = (() => {
         },
 
         deleteTodo: async (id: string) => {
-            const q = `mutation { deleteTask(input: { id: "${id}"}) { id title completed } }`;
-            await gql(q).then((r) => r.deleteTask);
+            const q = `mutation { deleteTodo(input: { id: "${id}"}) { id title completed createdAt } }`;
+            await gql(q).then((r) => r.deleteTodo);
             update((v) => {
                 const i = v.findIndex(r => r['id'] === id);
                 if (i !== -1) v.splice(i, 1);
@@ -53,7 +52,7 @@ const gql = async (query: string) => {
 };
 
 const refreshQuery = async () => {
-    const query = `query { queryTask { id title completed } }`;
+    const query = `query { queryTodo { id title completed createdAt } }`;
     const r = await gql(query);
-    return r.queryTask;
+    return r.queryTodo;
 };
