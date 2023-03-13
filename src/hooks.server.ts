@@ -11,6 +11,7 @@ export const handle = SvelteKitAuth({
       clientId: GOOGLE_ID,
       clientSecret: GOOGLE_SECRET
     }) as Provider<Profile>
-  ]
+  ],
+  trustHost: true
 }) satisfies Handle;
 
