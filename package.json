@@ -10,7 +10,8 @@
 		"os": false,
 		"zlib": false,
 		"net": false,
-		"tls": false
+		"tls": false,
+		"util": false
 	},
 	"scripts": {
 		"dev": "vite dev",
