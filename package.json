@@ -50,6 +50,7 @@
 		"@auth/sveltekit": "^0.3.0",
 		"graphql": "^16.6.0",
 		"json5": "^2.2.3",
-		"redis": "^4.5.1"
+		"redis": "^4.5.1",
+		"socket.io": "^4.6.1"
 	}
 }
