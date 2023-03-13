@@ -54,5 +54,6 @@ const gql = async (query: string) => {
 const refreshQuery = async () => {
     const query = `query { queryTodo { id title completed createdAt } }`;
     const r = await gql(query);
+    console.log(r);
     return r.queryTodo;
 };
